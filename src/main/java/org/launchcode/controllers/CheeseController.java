@@ -2,8 +2,10 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
+import org.launchcode.models.Menu;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.CategoryDao;
+import org.launchcode.models.data.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,9 @@ public class CheeseController {
 
     @Autowired
     private CategoryDao categoryDao;
+
+    @Autowired
+    private MenuDao menuDao;
 
     // Request path: /cheese
     @RequestMapping(value = "")
@@ -74,9 +79,17 @@ public class CheeseController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
+        final Iterable<Menu> menus = menuDao.findAll();
 
         for (int cheeseId : cheeseIds) {
-            cheeseDao.delete(cheeseId);
+            final Cheese cheese = cheeseDao.findOne(cheeseId);
+            for (Menu menu : menus) {
+                if(menu.getCheeses().contains(cheese)) {
+                    menu.getCheeses().remove(cheese);
+                    menuDao.save(menu);
+                }
+
+            }
         }
 
         return "redirect:";
