@@ -90,6 +90,9 @@ public class CheeseController {
                 }
 
             }
+            for (int someCheese : cheeseIds) {
+                cheeseDao.delete(someCheese);
+            }
         }
 
         return "redirect:";
