@@ -8,11 +8,11 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${menu.cheese.size()}">No Cheese</p>
+<p th:text="${menu.cheeses}" th:unless="${menu.cheeses.size()}">No Cheese</p>
 
 <div class="list-group">
     <ul>
-        <li th:each="cheese : ${menu.cheese}" th:text="${cheese.name}">
+        <li th:each="cheese : ${menu.cheeses}" th:text="${cheese.name}">
 
         </li>
     </ul>
