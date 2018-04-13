@@ -12,7 +12,8 @@
         <select class="form-control" name="cheeseId" th:field="*{cheeseId}">
             <option th:each="cheese : *{cheeses}"
                     th:text="${cheese.name}"
-                    th:value="${cheese.id}">
+                    th:value="${cheese.id}"
+                    th:text="${cheese.name}">
                 <span th:errors="*{cheeseId}" class="error"></span>
             </option>
         </select>

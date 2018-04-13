@@ -70,6 +70,47 @@ public class CheeseController {
         return "redirect:";
     }
 
+
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    public String displayEditCheeseForm(Model model) {
+        model.addAttribute("title", "Edit Cheese");
+        model.addAttribute("cheeses", cheeseDao.findAll());
+        return "cheese/edit";
+    }
+
+    
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String processEditUpdateCheeseForm(Model model, @RequestParam int[] cheeseIds) {
+        final Iterable<Cheese> cheeses = cheeseDao.findAll();
+        model.addAttribute("cheeses", cheeseDao.findAll());
+        model.addAttribute("title", "Update Cheese");
+
+        for (int oneCheese : cheeseIds) {
+            model.addAttribute("cheeses", cheeseDao.findOne(oneCheese));
+            /*final Cheese cheese = cheeseDao.findOne(oneCheese);*/
+        }
+        return "cheese/harry";
+    }
+
+    @RequestMapping(value = "harry", method = RequestMethod.POST)
+    public String processUpdateDB(@ModelAttribute  @Valid Cheese newCheese,
+                                       Errors errors,
+                                       @RequestParam int categoryId,
+                                       Model model) {
+        Category cat = categoryDao.findOne(categoryId);
+        newCheese.setCategory(cat);
+
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Cheese");
+            return "cheese/harry";
+        }
+
+
+        cheeseDao.save(newCheese);
+        return "redirect:";
+    }
+
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
@@ -77,14 +118,15 @@ public class CheeseController {
         return "cheese/remove";
     }
 
+
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
+    public String processRemoveCheeseForm ( @RequestParam int[] cheeseIds){
         final Iterable<Menu> menus = menuDao.findAll();
 
         for (int cheeseId : cheeseIds) {
             final Cheese cheese = cheeseDao.findOne(cheeseId);
             for (Menu menu : menus) {
-                if(menu.getCheeses().contains(cheese)) {
+                if (menu.getCheeses().contains(cheese)) {
                     menu.getCheeses().remove(cheese);
                     menuDao.save(menu);
                 }
