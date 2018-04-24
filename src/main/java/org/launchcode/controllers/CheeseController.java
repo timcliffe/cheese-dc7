@@ -3,6 +3,7 @@ package org.launchcode.controllers;
 import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
 import org.launchcode.models.Menu;
+import org.launchcode.models.data.NationDao;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.data.MenuDao;
@@ -33,12 +34,15 @@ public class CheeseController {
     @Autowired
     private MenuDao menuDao;
 
+    @Autowired
+    private NationDao nationDao;
+
     // Request path: /cheese
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "My Cheeses");
+        model.addAttribute("nations", nationDao.findAll());
+        model.addAttribute("title", "My Country");
 
         return "cheese/index";
     }
