@@ -33,15 +33,15 @@ public class CheeseController {
     @Autowired
     private UnitDao unitDao;
 
-//    // Request path: /cheese
-//    @RequestMapping(value = "")
-//    public String index(Model model) {
-//
-//        model.addAttribute("nations", nationDao.findAll());
-//        model.addAttribute("title", "My Country");
-//
-//        return "cheese/index";
-//    }
+    // Request path: /cheese
+    @RequestMapping(value = "")
+    public String index(Model model) {
+
+        model.addAttribute("nations", nationDao.findAll());
+        model.addAttribute("title", "My Country");
+
+        return "cheese/index";
+    }
 
 
     /*@RequestMapping(value = "add", method = RequestMethod.GET)
@@ -80,7 +80,7 @@ public class CheeseController {
         System.out.println("in get method");
         model.addAttribute("title", "Update Stats");
         model.addAttribute("nations", nationDao.findAll());
-        return "update-stats";
+        return "/update-stats";
     }
 //
 //    @RequestMapping(value = "update-stats", method = RequestMethod.POST)
