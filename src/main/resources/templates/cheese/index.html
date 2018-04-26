@@ -7,7 +7,6 @@
 
 <body class="container">
 
-<div contenteditable="true">
     <h1 th:text="${title}">Default Title</h1>
 
     <nav th:replace="fragments :: navigation"></nav>
@@ -37,7 +36,7 @@
         <td th:text="${resource.name}"></td>
         <td th:text="${resource.quantity}"></td>
     </tr>
-        </tr>
+    </tr>
     </table>
         <!--<li th:text="${resource.aluminum.quantity}"></li>
         <li th:text="${resource.iron.quantity}"></li>
@@ -61,7 +60,7 @@
             <td th:text="${city.industrialTier}"></td>
             <td th:text="${city.residentialTier}"></td>
         </tr>
-        </tr>
+    </tr>
     </table>
 
     <table>
@@ -71,14 +70,13 @@
         <tr th:each="territory : ${nation.territories}">
             <td th:text="${territory.name}"></td>
             <td th:text="${territory.quantity}"></td>
-        </tr>
+    </tr>
         </tr>
     </table>
 
 
 
-    <!--<p>Total Production:</p>
-    <p th:text="${nation.totalProduction}"></p>
+    <!--
 
     <p>Territories:</p>
     <ul>
@@ -136,6 +134,6 @@
     </tr>
 
     <input type="submit" value="Update Stats" />
---></div>
+-->
 </body>
 </html>
