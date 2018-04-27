@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<div>
+    <tr th:each="nation : ${nations}">
+        <p>Total Production: <td th:text="${nation.totalProduction}"></td></p>
+    </tr>
+</div>
+
+<form method="post" style="max-width:600px;" th:object="${unit}">
+
+<div>
+    <tr>
+        <td th:each="unit : ${units}"></td>
+        <div class="form-group">
+            <label th:for="${unit.name}">Unit</label>
+            <input class="form-control" th:field="*{unit}" />
+            <span th:errors="*{unit}" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label th:for="${unit.price}">Price</label>
+            <input class="form-control" th:field="*{unit}" />
+            <span th:errors="*{unit}" class="error"></span>
+        </div>
+    </tr>
+</div>
+
+    <input type="submit" value="Order" />
+</form>
+</body>
+</html>

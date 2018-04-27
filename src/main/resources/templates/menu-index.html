@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8" />
+</head>
+
+<body class="container">
+
+<div>
+
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <h1 th:text="${title}">Default Title</h1>
+
+
+    <p>Yee</p>
+
+
+    <tr th:each="nation : ${nations}">
+        <td th:text="${nation.name}">Nation Name</td>
+    </tr>
+
+    <!--<p><h2 th:text="${nation.leader}"></h2></p>
+
+    <p><h2 th:text="${nation.governmentType}"></h2></p>
+
+    <p>Base: 500pp</p>
+
+    <ul>
+        <li th:text="${resource.Oil.quantity}"></li>
+        <li th:text="${resource.Aluminum.quantity}"></li>
+        <li th:text="${resource.Iron.quantity}"></li>
+        <li th:text="${resource.Coal.quantity}"></li>
+        <li th:text="${resource.Timber.quantity}"></li>
+        <li th:text="${resource.Helium.quantity}"></li>
+        <li th:text="${resource.Opium.quantity}"></li>
+        <li th:text="${resource.cashCrops.quantity}"></li>
+        <li th:text="${resource.luxuryMinerals.quantity}"></li>
+        <li th:text="${resource.Food.quantity}"></li>
+    </ul>
+
+    <p>Cities:</p>
+    <tr th:each="city : ${cities}">
+        <td th:text="${city.name}"></td>
+        <td th:text="${city.industrialTier}"></td>
+        <td th:text="${city.residentialTier}"></td>
+    </tr>
+
+    <p>Total Production:</p>
+    <p th:text="${nation.totalProduction}"></p>
+
+    <p>Territories:</p>
+    <ul>
+        <li th:text="${territory.Tundra.quantity}"></li>
+        <li th:text="${territory.Subarctic.quantity}"></li>
+        <li th:text="${territory.Continental.quantity}"></li>
+        <li th:text="${territory.Oceanic.quantity}"></li>
+        <li th:text="${territory.Mediterranean.quantity}"></li>
+        <li th:text="${territory.Subtropical.quantity}"></li>
+        <li th:text="${territory.Jungle.quantity}"></li>
+        <li th:text="${territory.Savannah.quantity}"></li>
+        <li th:text="${territory.Steppe.quantity}"></li>
+        <li th:text="${territory.Semiarid.quantity}"></li>
+        <li th:text="${territory.Desert.quantity}"></li>
+        <li th:text="${territory.Highland.quantity}"></li>
+        <li th:text="${territory.Marsh.quantity}"></li>
+        <li th:text="${territory.Icecap.quantity}"></li>
+    </ul>
+
+    <p>Total Population:</p>
+    <p th:text="${nation.totalPopulation}"></p>
+
+    <h3>Waffenmacht:</h3>
+    <p>Total Manpower:</p><p th:text="${nation.totalManpower}"></p>
+
+    <p>Units:</p>
+    <h4>Heer</h4>
+    <tr th:each="unit : ${units.Heer}">
+        <td th:text="${unit.name}"></td>
+        <td th:text="${unit.quantity}"></td>
+    </tr>
+
+    <h4>Luftmacht</h4>
+    <tr th:each="unit : ${units.Luftmacht}">
+        <td th:text="${unit.name}"></td>
+        <td th:text="${unit.quantity}"></td>
+    </tr>
+
+    <h4>Meermacht</h4>
+    <tr th:each="unit : ${units.Meermacht}">
+        <td th:text="${unit.name}"></td>
+        <td th:text="${unit.quantity}"></td>
+    </tr>
+
+    <h4>Marinenkorps</h4>
+    <tr th:each="unit : ${units.Marinenkorps}">
+        <td th:text="${unit.name}"></td>
+        <td th:text="${unit.quantity}"></td>
+    </tr>
+
+    <h4>Kampfen SS</h4>
+    <tr th:each="unit : ${units.KampfenSS}">
+        <td th:text="${unit.name}"></td>
+        <td th:text="${unit.quantity}"></td>
+    </tr>
+
+    --><input type="submit" value="Update Stats" />
+</div>
+</body>
+</html>

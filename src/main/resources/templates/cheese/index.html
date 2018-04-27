@@ -70,13 +70,11 @@
         <th>Quantity</th>
         <th>Type</th>
         <th>Category</th>
-        <tr th:each="nation : ${nations}">
-        <tr th:each="unit : ${nation.units}">
+        <tr th:each="unit : ${units}">
             <td th:text="${unit.name}"></td>
             <td th:text="${unit.quantity}"></td>
             <td th:text="${unit.type}"></td>
             <td th:text="${unit.category}"></td>
-        </tr>
         </tr>
     </table>
 
