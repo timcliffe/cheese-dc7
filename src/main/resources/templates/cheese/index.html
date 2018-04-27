@@ -38,16 +38,7 @@
     </tr>
     </tr>
     </table>
-        <!--<li th:text="${resource.aluminum.quantity}"></li>
-        <li th:text="${resource.iron.quantity}"></li>
-        <li th:text="${resource.coal.quantity}"></li>
-        <li th:text="${resource.timber.quantity}"></li>
-        <li th:text="${resource.helium.quantity}"></li>
-        <li th:text="${resource.opium.quantity}"></li>
-        <li th:text="${resource.cashCrops.quantity}"></li>
-        <li th:text="${resource.luxuryMinerals.quantity}"></li>
-        <li th:text="${resource.Food.quantity}"></li>
-    </ul>-->
+
 
 
     <table>
@@ -74,66 +65,23 @@
         </tr>
     </table>
 
+    <table>
+        <th>Unit</th>
+        <th>Quantity</th>
+        <th>Type</th>
+        <th>Category</th>
+        <tr th:each="nation : ${nations}">
+        <tr th:each="unit : ${nation.units}">
+            <td th:text="${unit.name}"></td>
+            <td th:text="${unit.quantity}"></td>
+            <td th:text="${unit.type}"></td>
+            <td th:text="${unit.category}"></td>
+        </tr>
+        </tr>
+    </table>
 
 
-    <!--
 
-    <p>Territories:</p>
-    <ul>
-        <li th:text="${territory.Tundra.quantity}"></li>
-        <li th:text="${territory.Subarctic.quantity}"></li>
-        <li th:text="${territory.Continental.quantity}"></li>
-        <li th:text="${territory.Oceanic.quantity}"></li>
-        <li th:text="${territory.Mediterranean.quantity}"></li>
-        <li th:text="${territory.Subtropical.quantity}"></li>
-        <li th:text="${territory.Jungle.quantity}"></li>
-        <li th:text="${territory.Savannah.quantity}"></li>
-        <li th:text="${territory.Steppe.quantity}"></li>
-        <li th:text="${territory.Semiarid.quantity}"></li>
-        <li th:text="${territory.Desert.quantity}"></li>
-        <li th:text="${territory.Highland.quantity}"></li>
-        <li th:text="${territory.Marsh.quantity}"></li>
-        <li th:text="${territory.Icecap.quantity}"></li>
-    </ul>
 
-    <p>Total Population:</p>
-    <p th:text="${nation.totalPopulation}"></p>
-
-    <h3>Waffenmacht:</h3>
-    <p>Total Manpower:</p><p th:text="${nation.totalManpower}"></p>
-
-    <p>Units:</p>
-    <h4>Heer</h4>
-    <tr th:each="unit : ${units.Heer}">
-        <td th:text="${unit.name}"></td>
-        <td th:text="${unit.quantity}"></td>
-    </tr>
-
-    <h4>Luftmacht</h4>
-    <tr th:each="unit : ${units.Luftmacht}">
-        <td th:text="${unit.name}"></td>
-        <td th:text="${unit.quantity}"></td>
-    </tr>
-
-    <h4>Meermacht</h4>
-    <tr th:each="unit : ${units.Meermacht}">
-        <td th:text="${unit.name}"></td>
-        <td th:text="${unit.quantity}"></td>
-    </tr>
-
-    <h4>Marinenkorps</h4>
-    <tr th:each="unit : ${units.Marinenkorps}">
-        <td th:text="${unit.name}"></td>
-        <td th:text="${unit.quantity}"></td>
-    </tr>
-
-    <h4>Kampfen SS</h4>
-    <tr th:each="unit : ${units.KampfenSS}">
-        <td th:text="${unit.name}"></td>
-        <td th:text="${unit.quantity}"></td>
-    </tr>
-
-    <input type="submit" value="Update Stats" />
--->
 </body>
 </html>

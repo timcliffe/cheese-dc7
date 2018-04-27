@@ -199,23 +199,24 @@ public class CheeseController {
         model.addAttribute("title", "Add New Units");
         model.addAttribute(new Unit());
         model.addAttribute("nations", nationDao.findAll());
-        return "cheese/add-new-units";
+        return "/add-new-units";
+
     }
 
     @RequestMapping(value = "add-new-units", method = RequestMethod.POST)
-    public String processAddNewUnitsForm(@ModelAttribute  @Valid Unit newUnit,
+    public String processAddNewUnitsForm(@ModelAttribute  @Valid Unit unit,
                                        Errors errors,
                                        @RequestParam int categoryId,
                                        Model model) {
 
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
-            return "cheese/add-new-units";
+            model.addAttribute("title", "Add New Units");
+            return "/add-new-units";
         }
 
 
-        unitDao.save(newUnit);
+        unitDao.save(unit);
         return "redirect:";
     }
 }
