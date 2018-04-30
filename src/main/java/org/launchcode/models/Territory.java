@@ -18,21 +18,17 @@ public class Territory {
     public Territory() {
     }
 
-    @NotNull
     private String climateType;
 
 
-    @NotNull
     private String name;
 
     @Id
     @GeneratedValue
     private int id;
 
-    @NotNull
     private int quantity;
 
-    @NotNull
     private int populationBonus;
 
     public String getName() {

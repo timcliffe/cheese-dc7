@@ -2,32 +2,27 @@ package org.launchcode.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Entity
 //@Table(name = "nation")
 public class Nation {
 
-    @NotNull
     public String name;
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
     private String governmentType;
 
-    @NotNull
     private String leader;
 
-    @NotNull
     private int totalProduction;
 
-    @NotNull
     private int totalPopulation;
 
-    @NotNull
     private int totalManpower;
 
     @OneToMany

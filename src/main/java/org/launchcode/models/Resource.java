@@ -12,17 +12,13 @@ public class Resource {
     @GeneratedValue
     private int id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String type;
 
-    @NotNull
     private int quantity;
 
-    @NotNull
-    private int productionBonus;
+    private int productionBonus = 50;
 
     public Resource() {
     }
@@ -34,6 +30,8 @@ public class Resource {
         this.type = type;
         this.productionBonus = productionBonus;
     }
+
+
 
     public void setId(int id) {
         this.id = id;

@@ -78,30 +78,33 @@ public class CheeseController {
 //        return nationDao.findAll();
 //    }
     public String displayUpdateStatsForm(Model model) {
-        System.out.println("in get method");
         model.addAttribute("title", "Update Stats");
-        model.addAttribute("nations", nationDao.findAll());
+        model.addAttribute("nation", nationDao.findAll());
+        model.addAttribute("resource", resourceDao.findAll());
+        model.addAttribute("territory", territoryDao.findAll());
+        model.addAttribute("city", cityDao.findAll());
         return "/update-stats";
     }
 //
-    @RequestMapping(value = "update-stats", method = RequestMethod.POST)
-    public String processUpdateStatsForm(@ModelAttribute  @Valid Territory newTerritory, City newCity, Resource newResource,
-                                       Errors errors,
-                                       @RequestParam int id,
-                                       Model model) {
+@RequestMapping(value = "update-stats", method = RequestMethod.POST)
+public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation, Territory territory, Resource resource, City city,
+                                   Errors errors,
+                                   Model model) {
 
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Update Stats");
-            return "update-stats";
-        }
-
-
-        territoryDao.save(newTerritory);
-        cityDao.save(newCity);
-        resourceDao.save(newResource);
-        return "redirect:";
+    if (errors.hasErrors()) {
+        model.addAttribute("title", "Update Stats");
+        return "cheese/update-stats";
     }
+
+        territoryDao.save(territory);
+        cityDao.save(city);
+        resourceDao.save(resource);
+        nationDao.save(nation);
+        return "cheese/index";
+    }
+
+
 
     /*@RequestMapping(value = "update-stats", method = RequestMethod.GET)
     public String displayUpdateStatsForm(Model model) {

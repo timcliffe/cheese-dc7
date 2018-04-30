@@ -12,16 +12,12 @@ public class City {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
     private int industrialTier;
 
-    @NotNull
     private int residentialTier;
 
-    @NotNull
     private int productionBonus;
 
-    @NotNull
     private int populationBonus;
 
     @ManyToOne

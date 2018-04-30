@@ -10,9 +10,7 @@
 
 
 
-<form method="post" style="max-width:600px;" th:object="${nation}">
-    <tr th:each="nation : {nations}">
-        <tr th:each="unit : {nation.units}">
+<form method="post" style="max-width:600px;" th:object="${unit}">
     <p>Name:</p>
 <div>
     <input type="text" th:value="${unit.name}" id="unitName" name="unitName" />
@@ -37,7 +35,6 @@
     <div>
         <input type="text" th:value="${unit.quantity}" id="unitQuantity" name="unitQuantity" />
     </div>
-</tr>
     <input type="submit" value="Add Unit" />
 </form>
     <!--<div class="form-group">-->
