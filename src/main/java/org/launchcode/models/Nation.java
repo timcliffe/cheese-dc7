@@ -75,6 +75,8 @@ public class Nation {
     }
 
     public int getTotalProduction() {
+
+
         return totalProduction;
     }
 

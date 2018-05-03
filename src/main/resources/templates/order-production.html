@@ -22,7 +22,7 @@
             <p th:text="${unit.name}"></p>
                 <div class="form-group">
                     <label th:for="quantity">Quantity</label>
-                    <input class="form-control" th:value="${unit.quantity}" name="unitIds"  />
+                    <input class="form-control" th:value="${unit.quantity}" name="unitQuantity" id="unitQuantity" />
                     <input class="form-control" th:value="${unit.id}" name="unitIds" id="unitIds" />
                     <!--<span th:errors="${unit.quantity}" class="error"></span>-->
                 </div>

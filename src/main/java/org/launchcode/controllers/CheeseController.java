@@ -91,12 +91,13 @@ public class CheeseController {
 //
     @RequestMapping(value = "update-stats", method = RequestMethod.POST)
     public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation,
-                                       Errors errors, @RequestParam int id, int[] resourceIds, int[] resourceQty,
+                                       Errors errors, @RequestParam int nationId, int[] resourceIds, int[] resourceQty, int[]territoryIds,
+                                         int[] territoryQuantity, int[] cityIds, int[] industrialTier, int[] residentialTier,
                                        Model model) {
 
 
-        model.addAttribute("nation", nationDao.findOne(id));
-        nation.id = id;
+        model.addAttribute("nation", nationDao.findOne(nationId));
+        nation.id = nationId;
         nationDao.save(nation);
         int resourceQtyIdx = 0;
         for (int resourceId : resourceIds ) {
@@ -106,6 +107,26 @@ public class CheeseController {
             resource.setQuantity(tempQuantity);
             resourceDao.save(resource);
             resourceQtyIdx++;
+        }
+        int territoryQtyIdx = 0;
+        for (int territoryId : territoryIds ) {
+            model.addAttribute("territory", territoryDao.findOne(territoryId));
+            Territory territory = territoryDao.findOne(territoryId);
+            int tempQuantity = territoryQuantity[territoryQtyIdx];
+            territory.setQuantity(tempQuantity);
+            territoryDao.save(territory);
+            territoryQtyIdx++;
+        }
+        int cityTierIdx = 0;
+        for (int cityId : cityIds ) {
+            model.addAttribute("city", cityDao.findOne(cityId));
+            City city = cityDao.findOne(cityId);
+            int tempIndustrial = industrialTier[cityTierIdx];
+            int tempResidential = residentialTier[cityTierIdx];
+            city.setIndustrialTier(tempIndustrial);
+            city.setResidentialTier(tempResidential);
+            cityDao.save(city);
+            cityTierIdx++;
         }
 
 
@@ -251,23 +272,81 @@ public class CheeseController {
     }
 
 
+
+
+
+
+
+
+
+
     @RequestMapping(value = "order-production", method = RequestMethod.POST)
-    public String processOrderProductionForm(Model model, Errors errors, @RequestParam int[] unitIds) {
-        final Iterable<Unit> units = unitDao.findAll();
-        model.addAttribute("units", unitDao.findAll());
-        model.addAttribute("title", "Order Production");
+    public String processOrderProductionForm(@ModelAttribute @Valid Nation nation, Errors errors, Model model, @RequestParam int[] unitIds, int[] unitQuantity) {
 
-        for (Unit unit : units) {
-            model.addAttribute("quantity", unit.getQuantity());
-        }
-
-        for (int oneUnit : unitIds) {
-            model.addAttribute("units", unitDao.findOne(oneUnit));
-            Unit unit = unitDao.findOne(oneUnit);
+        int unitQtyIdx = 0;
+        for (int unitId : unitIds) {
+            model.addAttribute("units", unitDao.findOne(unitId));
+            Unit unit = unitDao.findOne(unitId);
+            int tempQuantity = unitQuantity[unitQtyIdx];
+            unit.setQuantity(tempQuantity);
             unitDao.save(unit);
+            unitQtyIdx++;
 
         }
         return "cheese/index";
     }
 
 }
+
+//    @RequestMapping(value = "update-stats", method = RequestMethod.POST)
+//    public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation,
+//                                         Errors errors, @RequestParam int nationId, int[] resourceIds, int[] resourceQty, int[]territoryIds,
+//                                         int[] territoryQuantity, int[] cityIds, int[] industrialTier, int[] residentialTier,
+//                                         Model model) {
+//
+//
+//        model.addAttribute("nation", nationDao.findOne(nationId));
+//        nation.id = nationId;
+//        nationDao.save(nation);
+//        int resourceQtyIdx = 0;
+//        for (int resourceId : resourceIds ) {
+//            model.addAttribute("resource", resourceDao.findOne(resourceId));
+//            Resource resource = resourceDao.findOne(resourceId);
+//            int tempQuantity = resourceQty[resourceQtyIdx];
+//            resource.setQuantity(tempQuantity);
+//            resourceDao.save(resource);
+//            resourceQtyIdx++;
+//        }
+//        int territoryQtyIdx = 0;
+//        for (int territoryId : territoryIds ) {
+//            model.addAttribute("territory", territoryDao.findOne(territoryId));
+//            Territory territory = territoryDao.findOne(territoryId);
+//            int tempQuantity = territoryQuantity[territoryQtyIdx];
+//            territory.setQuantity(tempQuantity);
+//            territoryDao.save(territory);
+//            territoryQtyIdx++;
+//        }
+//        int cityTierIdx = 0;
+//        for (int cityId : cityIds ) {
+//            model.addAttribute("city", cityDao.findOne(cityId));
+//            City city = cityDao.findOne(cityId);
+//            int tempIndustrial = industrialTier[cityTierIdx];
+//            int tempResidential = residentialTier[cityTierIdx];
+//            city.setIndustrialTier(tempIndustrial);
+//            city.setResidentialTier(tempResidential);
+//            cityDao.save(city);
+//            cityTierIdx++;
+//        }
+//
+//
+//
+//        if (errors.hasErrors()) {
+//            model.addAttribute("title", "Error");
+//            return "update-stats";
+//        }
+//        model.addAttribute("nations", nationDao.findAll());
+//        model.addAttribute("units", unitDao.findAll());
+//        model.addAttribute("title", "My Country");
+//
+//        return "cheese/index";
+//    }

@@ -69,36 +69,50 @@
         <thblock th:each="territory : ${territories}">
             Territories: <input class="form-control"
                               type="text"
-                              th:value="${territory.name}" name="territoryName" />
+                              th:value="${territory.name}" name="territoryName" id="territoryName" />
             <input class="form-control"
                    type="text"
-                   th:value="${territory.id}" name="id" />
+                   th:value="${territory.id}" name="territoryIds" id="territoryIds" />
             <input class="form-control"
                    type="text"
-                   th:value="${territory.climateType}" name="climateType" />
+                   th:value="${territory.climateType}" name="climateType" id="climateType" />
             <input class="form-control"
                    type="text"
-                   th:value="${territory.quantity}" name="territoryQuantity" />
+                   th:value="${territory.quantity}" name="territoryQuantity" id="territoryQuantity" />
             <input class="form-control"
                    type="text"
-                   th:value="${territory.populationBonus}" name="populationBonus" />
+                   th:value="${territory.populationBonus}" name="populationBonus" id="populationBonus" />
 
         </thblock>
 
-        <thblock th:each="city : ${cities}">
-            <div th:text="${city.name}" id="${city.id}">
-                <div class="form-group">
-                    <select class="form-control" th:field="${city.residentialTier}">
-                        <option value=""> -- </option>
-                        <option value="Tier 1">Tier 0</option>
-                        <option value="Tier 1">Tier 1</option>
-                        <option value="Tier 1">Tier 2</option>
-                        <option value="Tier 1">Tier 3</option>
-                        <option value="Tier 1">Tier 4</option>
-                    </select>
-                </div>
-            </div>
-        </thblock>
+
+    <thblock th:each="city : ${cities}">
+        <h2>City:</h2> <label for="cityName">Name:</label>
+        <input class="form-control"
+                            type="text"
+                            th:value="${city.name}" name="cityName" id="cityName" />
+        <label for="cityIds">Id:</label>
+        <input class="form-control"
+               type="text"
+               th:value="${city.id}" name="cityIds" id="cityIds" />
+        <label for="industrialTier">Industrial Tier:</label>
+        <input class="form-control"
+               type="text"
+               th:value="${city.industrialTier}" name="industrialTier" id="industrialTier" />
+        <label for="residentialTier">Residential Tier:</label>
+        <input class="form-control"
+               type="text"
+               th:value="${city.residentialTier}" name="residentialTier" id="residentialTier" />
+        <label for="populationBonus">Population Bonus:</label>
+        <input class="form-control"
+               type="text"
+               th:value="${city.populationBonus}" name="populationBonus" id="cityPopulationBonus" />
+        <label for="productionBonus">Production Bonus:</label>
+        <input class="form-control"
+               type="text"
+               th:value="${city.productionBonus}" name="productionBonus" id="cityProductionBonus" />
+
+    </thblock>
 
 
 
