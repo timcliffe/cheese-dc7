@@ -5,253 +5,100 @@
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
+<form method="post">
 <div>
-<form class="form-horizontal" th:object="${nation}" method="post">
-    <input type="hidden" th:value="${id}"/>
-    <div class="form-group">
-        <label class="col sm-2 control-label">Nation Name: </label>
-        <div class="col sm-10">
-            <input type="text" class="form-control" th:value="${name}" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col sm-2 control-label">Leader Name: </label>
-        <div class="col sm-10">
-            <input type="text" class="form-control" th:value="${leader}" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col sm-2 control-label">Government Type: </label>
-        <div class="col sm-10">
-            <input type="text" class="form-control" th:value="${governmentType}" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col sm-2 control-label">Total Production: </label>
-        <div class="col sm-10">
-            <input type="text" class="form-control" th:value="${totalProduction}" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col sm-2 control-label">Total Population: </label>
-        <div class="col sm-10">
-            <input type="text" class="form-control" th:value="${totalPopulation}" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col sm-2 control-label">Total Manpower: </label>
-        <div class="col sm-10">
-            <input type="text" class="form-control" th:value="${totalManpower}" />
-        </div>
-    </div>
-</form>
-</div>
+        <thblock th:each="nation : ${nations}">
+        Nation Name: <input class="form-control"
+                            type="text"
+                            th:value="${nation.name}" id="name" name="name" />
 
-<!--<div>-->
-    <!--<form class="form-horizontal" th:object="${resource}" method="post">-->
-        <!--<input type="hidden" th:field="*{id}"/>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Resource Name: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{resource.name}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Type: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{resource.type}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Quantity: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{resource.quantity}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Production Bonus: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{resource.productionBonus}" />-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
-
-<!--<div>-->
-    <!--<form class="form-horizontal" th:object="${territory}" method="post">-->
-        <!--<input type="hidden" th:field="*{id}"/>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Territory Name: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{territory.name}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Climate Type: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{territory.climateType}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Quantity: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{territory.quantity}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Population Bonus: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{territory.populationBonus}" />-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
-
-<!--<h2>Add New City</h2>-->
-<!--<div>-->
-    <!--<form class="form-horizontal" th:object="${city}" method="post">-->
-        <!--<input type="hidden" th:field="*{id}"/>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">City Name: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{city.name}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Industrial District: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{territory.industrialTier}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Residential District: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{territory.residentialTier}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Production Bonus: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{city.productionBonus}" />-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="col sm-2 control-label">Population Bonus: </label>-->
-            <!--<div class="col sm-10">-->
-                <!--<input type="text" class="form-control" th:field="*{city.populationBonus}" />-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
-
-<!--<h2>Upgrade Cities</h2>-->
-<!--<div>-->
-    <!--<form th:each="city : ${cities}" method="post:">-->
-        <!--<input type="hidden" th:field="*{id}" />-->
-            <!--<div class="form-group">-->
-                <!--<select class="form-control" th:field="${city.industrialTier}">-->
-                    <!--<option value=""> &#45;&#45; </option>-->
-                    <!--<option value="Tier 1">Tier 0</option>-->
-                    <!--<option value="Tier 1">Tier 1</option>-->
-                    <!--<option value="Tier 1">Tier 2</option>-->
-                    <!--<option value="Tier 1">Tier 3</option>-->
-                    <!--<option value="Tier 1">Tier 4</option>-->
-                <!--</select>-->
-            <!--</div>-->
-
-        <!--<div class="form-group">-->
-            <!--<select class="form-control" th:field="${city.residentialTier}">-->
-                <!--<option value=""> &#45;&#45; </option>-->
-                <!--<option value="Tier 1">Tier 0</option>-->
-                <!--<option value="Tier 1">Tier 1</option>-->
-                <!--<option value="Tier 1">Tier 2</option>-->
-                <!--<option value="Tier 1">Tier 3</option>-->
-                <!--<option value="Tier 1">Tier 4</option>-->
-            <!--</select>-->
-        <!--</div>-->
-    <!--</form>-->
-
-
-        <!--<thblock th:each="nation : ${nations}">-->
-        <!--Nation Name: <input class="form-control"-->
-                            <!--type="text"-->
-                            <!--th:value="${nation.name}" id="name" name="name" />-->
+            Nation Name: <input class="form-control"
+                                type="text"
+                                th:value="${nation.id}" id="nationId" name="nationId" />
 
 
 
-                <!--Nation Name: <input class="form-control" th:field="${id}"-->
-                                    <!--type="text"-->
-                                    <!--th:value="${nation.leader}" id="leader" name="leader" />-->
+
+            Nation Name: <input class="form-control"
+                                    type="text"
+                                    th:value="${nation.leader}" id="leader" name="leader" />
 
 
 
-                    <!--Nation Name: <input class="form-control" th:field="${id}"-->
-                                        <!--type="text"-->
-                                        <!--th:value="${nation.governmentType}" id="governmentType" name="governmentType" />-->
+                    Nation Name: <input class="form-control"
+                                        type="text"
+                                        th:value="${nation.governmentType}" id="governmentType" name="governmentType" />
 
 
-                        <!--Nation Name: <input class="form-control" th:field="${id}"-->
-                                            <!--type="text"-->
-                                            <!--th:value="${nation.totalManpower}" id="totalManpower" name="totalManpower" />-->
+                        Nation Name: <input class="form-control"
+                                            type="text"
+                                            th:value="${nation.totalManpower}" id="totalManpower" name="totalManpower" />
 
 
-                            <!--Nation Name: <input class="form-control" th:field="${id}"-->
-                                                <!--type="text"-->
-                                                <!--th:value="${nation.totalPopulation}" id="totalPopulation" name="totalPopulation" />-->
+                            Nation Name: <input class="form-control"
+                                                type="text"
+                                                th:value="${nation.totalPopulation}" id="totalPopulation" name="totalPopulation" />
 
 
-                                <!--TotalProduction: <input class="form-control" th:field="${id}"-->
-                                                    <!--type="text"-->
-                                                    <!--th:value="${nation.totalProduction}" id="totalProduction" name="totalProduction" />-->
-        <!--</thblock>-->
+                                TotalProduction: <input class="form-control"
+                                                    type="text"
+                                                    th:value="${nation.totalProduction}" id="totalProduction" name="totalProduction" />
+        </thblock>
 
 
-        <!--<thblock th:each="resource : ${resources}">-->
-        <!--Resources: <input class="form-control" th:field="${id}"-->
-                          <!--type="text"-->
-                          <!--th:value="${resource.name}" name="name" />-->
-            <!--<input class="form-control" th:field="${id}"-->
-                   <!--type="text"-->
-                   <!--th:value="${resource.quantity}" name="resourceQty" />-->
-            <!--<input class="form-control" th:field="${id}"-->
-                   <!--type="text"-->
-                   <!--th:value="${resource.productionBonus}" name="productionBonus" />-->
-            <!--<input class="form-control" th:field="${id}"-->
-                   <!--type="text"-->
-                   <!--th:value="${resource.type}" name="type" />-->
+        <thblock th:each="resource : ${resources}">
+        Resources: <input class="form-control"
+                          type="text"
+                          th:value="${resource.name}" name="resourceName" id="resourceName" />
+            <input class="form-control"
+                   type="text"
+                   th:value="${resource.id}" name="resourceIds" id="resourceIds" />
 
-        <!--</thblock>-->
+            <input class="form-control"
+                   type="text"
+                   th:value="${resource.quantity}" name="resourceQty" id="resourceQty" />
+            <input class="form-control"
+                   type="text"
+                   th:value="${resource.productionBonus}" name="productionBonus" id="productionBonus" />
+            <input class="form-control"
+                   type="text"
+                   th:value="${resource.type}" name="type" />
 
-        <!--<thblock th:each="territory : ${territories}">-->
-            <!--Territories: <input class="form-control"-->
-                              <!--type="text"-->
-                              <!--th:value="${territory.name}" name="territoryName" />-->
-            <!--<input class="form-control" th:field="${id}"-->
-                   <!--type="text"-->
-                   <!--th:value="${territory.climateType}" name="climateType" />-->
-            <!--<input class="form-control" th:field="${id}"-->
-                   <!--type="text"-->
-                   <!--th:value="${territory.quantity}" name="territoryQuantity" />-->
-            <!--<input class="form-control" th:field="${id}"-->
-                   <!--type="text"-->
-                   <!--th:value="${territory.populationBonus}" name="populationBonus" />-->
+        </thblock>
 
-        <!--</thblock>-->
+        <thblock th:each="territory : ${territories}">
+            Territories: <input class="form-control"
+                              type="text"
+                              th:value="${territory.name}" name="territoryName" />
+            <input class="form-control"
+                   type="text"
+                   th:value="${territory.id}" name="id" />
+            <input class="form-control"
+                   type="text"
+                   th:value="${territory.climateType}" name="climateType" />
+            <input class="form-control"
+                   type="text"
+                   th:value="${territory.quantity}" name="territoryQuantity" />
+            <input class="form-control"
+                   type="text"
+                   th:value="${territory.populationBonus}" name="populationBonus" />
 
-        <!--<thblock th:each="city : ${cities}">-->
-            <!--<div th:text="${city.name}" id="${city.id}">-->
-                <!--<div class="form-group">-->
-                    <!--<select class="form-control" th:field="${city.residentialTier}" th:field="${id}">-->
-                        <!--<option value=""> &#45;&#45; </option>-->
-                        <!--<option value="Tier 1">Tier 0</option>-->
-                        <!--<option value="Tier 1">Tier 1</option>-->
-                        <!--<option value="Tier 1">Tier 2</option>-->
-                        <!--<option value="Tier 1">Tier 3</option>-->
-                        <!--<option value="Tier 1">Tier 4</option>-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</thblock>-->
+        </thblock>
+
+        <thblock th:each="city : ${cities}">
+            <div th:text="${city.name}" id="${city.id}">
+                <div class="form-group">
+                    <select class="form-control" th:field="${city.residentialTier}">
+                        <option value=""> -- </option>
+                        <option value="Tier 1">Tier 0</option>
+                        <option value="Tier 1">Tier 1</option>
+                        <option value="Tier 1">Tier 2</option>
+                        <option value="Tier 1">Tier 3</option>
+                        <option value="Tier 1">Tier 4</option>
+                    </select>
+                </div>
+            </div>
+        </thblock>
 
 
 
@@ -274,6 +121,8 @@
             <!--</td>-->
         <!--</tr>-->
             <input type="submit" value="Update Stats" />
+</div>
+</form>
 
 </body>
 </html>

@@ -13,7 +13,7 @@ public class Nation {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int id;
+    public int id;
 
     private String governmentType;
 

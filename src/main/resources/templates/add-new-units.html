@@ -13,27 +13,31 @@
 <form method="post" style="max-width:600px;" th:object="${unit}">
     <p>Name:</p>
 <div>
-    <input type="text" th:value="${unit.name}" id="unitName" name="unitName" />
+    <input type="text" th:field="*{name}" id="unitName" name="unitName" />
 </div>
     <p>Type:</p>
     <div>
-        <input type="text" th:value="${unit.type}" id="unitType" name="unitType" />
+        <input type="text" th:field="*{type}" id="unitType" name="unitType" />
     </div>
     <p>Category:</p>
     <div>
-        <input type="text" th:value="${unit.category}" id="unitCategory" name="unitCategory" />
+        <input type="text" th:field="*{category}" id="unitCategory" name="unitCategory" />
     </div>
     <p>Price:</p>
     <div>
-        <input type="text" th:value="${unit.price}" id="unitPrice" name="unitPrice" />
+        <input type="text" th:field="*{price}" id="unitPrice" name="unitPrice" />
     </div>
     <p>Production Time:</p>
     <div>
-        <input type="text" th:value="${unit.productionTime}" id="unitProductionTime" name="unitProductionTime" />
+        <input type="text" th:field="*{productionTime}" id="unitProductionTime" name="unitProductionTime" />
     </div>
     <p>Quantity:</p>
     <div>
-        <input type="text" th:value="${unit.quantity}" id="unitQuantity" name="unitQuantity" />
+        <input type="text" th:field="*{quantity}" id="unitQuantity" name="unitQuantity" />
+    </div>
+    <p>ID:</p>
+    <div>
+        <input type="text" th:field="*{id}" id="id" name="id" />
     </div>
     <input type="submit" value="Add Unit" />
 </form>

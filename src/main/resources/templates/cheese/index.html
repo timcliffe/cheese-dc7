@@ -31,11 +31,9 @@
     <table>
         <th>Resource</th>
         <th>Quantity</th>
-        <tr th:each="nation : ${nations}">
-        <tr th:each="resource : ${nation.resources}">
+        <tr th:each="resource : ${resources}">
         <td th:text="${resource.name}"></td>
         <td th:text="${resource.quantity}"></td>
-    </tr>
     </tr>
     </table>
 
@@ -45,24 +43,20 @@
         <th>City</th>
         <th>Industrial District</th>
         <th>Residential District</th>
-        <tr th:each="nation : ${nations}">
-        <tr th:each="city : ${nation.cities}">
+        <tr th:each="city : ${cities}">
             <td th:text="${city.name}"></td>
             <td th:text="${city.industrialTier}"></td>
             <td th:text="${city.residentialTier}"></td>
         </tr>
-    </tr>
     </table>
 
     <table>
         <th>Territory</th>
         <th>Quantity</th>
-        <tr th:each="nation : ${nations}">
-        <tr th:each="territory : ${nation.territories}">
+        <tr th:each="territory : ${territories}">
             <td th:text="${territory.name}"></td>
             <td th:text="${territory.quantity}"></td>
     </tr>
-        </tr>
     </table>
 
     <table>

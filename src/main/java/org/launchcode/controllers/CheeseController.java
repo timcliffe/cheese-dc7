@@ -39,6 +39,9 @@ public class CheeseController {
 
         model.addAttribute("nations", nationDao.findAll());
         model.addAttribute("units", unitDao.findAll());
+        model.addAttribute("resources", resourceDao.findAll());
+        model.addAttribute("territories", territoryDao.findAll());
+        model.addAttribute("cities", cityDao.findAll());
         model.addAttribute("title", "My Country");
 
         return "cheese/index";
@@ -79,32 +82,44 @@ public class CheeseController {
 //    }
     public String displayUpdateStatsForm(Model model) {
         model.addAttribute("title", "Update Stats");
-        model.addAttribute("nation", nationDao.findAll());
-        model.addAttribute("resource", resourceDao.findAll());
-        model.addAttribute("territory", territoryDao.findAll());
-        model.addAttribute("city", cityDao.findAll());
+        model.addAttribute("nations", nationDao.findAll());
+        model.addAttribute("resources", resourceDao.findAll());
+        model.addAttribute("territories", territoryDao.findAll());
+        model.addAttribute("cities", cityDao.findAll());
         return "/update-stats";
     }
 //
-@RequestMapping(value = "update-stats", method = RequestMethod.POST)
-public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation, Territory territory, Resource resource, City city,
-                                   Errors errors,
-                                   Model model) {
+    @RequestMapping(value = "update-stats", method = RequestMethod.POST)
+    public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation,
+                                       Errors errors, @RequestParam int id, int[] resourceIds, int[] resourceQty,
+                                       Model model) {
 
 
-    if (errors.hasErrors()) {
-        model.addAttribute("title", "Update Stats");
-        return "cheese/update-stats";
-    }
-
-        territoryDao.save(territory);
-        cityDao.save(city);
-        resourceDao.save(resource);
+        model.addAttribute("nation", nationDao.findOne(id));
+        nation.id = id;
         nationDao.save(nation);
+        int resourceQtyIdx = 0;
+        for (int resourceId : resourceIds ) {
+            model.addAttribute("resource", resourceDao.findOne(resourceId));
+            Resource resource = resourceDao.findOne(resourceId);
+            int tempQuantity = resourceQty[resourceQtyIdx];
+            resource.setQuantity(tempQuantity);
+            resourceDao.save(resource);
+            resourceQtyIdx++;
+        }
+
+
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Error");
+            return "update-stats";
+        }
+        model.addAttribute("nations", nationDao.findAll());
+        model.addAttribute("units", unitDao.findAll());
+        model.addAttribute("title", "My Country");
+
         return "cheese/index";
-    }
-
-
+            }
 
     /*@RequestMapping(value = "update-stats", method = RequestMethod.GET)
     public String displayUpdateStatsForm(Model model) {
@@ -209,7 +224,7 @@ public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation, Terr
     }
 
     @RequestMapping(value = "add-new-units", method = RequestMethod.POST)
-    public String processAddNewUnitsForm(@ModelAttribute Unit newUnit, Nation nation,
+    public String processAddNewUnitsForm(@ModelAttribute Unit unit, Nation nation,
                                        Errors errors,
                                        Model model) {
 
@@ -221,8 +236,8 @@ public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation, Terr
         }
 
 
-        unitDao.save(newUnit);
-        nationDao.save(nation);
+        unitDao.save(unit);
+//        nationDao.save(nation);
         return "redirect:";
     }
 
@@ -230,9 +245,29 @@ public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation, Terr
     @RequestMapping(value = "order-production", method = RequestMethod.GET)
     public String displayOrderProductionForm(Model model) {
     model.addAttribute("title", "Order Production");
-    model.addAttribute(new Unit());
     model.addAttribute("units", unitDao.findAll());
     model.addAttribute("nations", nationDao.findAll());
     return "/order-production";
     }
+
+
+    @RequestMapping(value = "order-production", method = RequestMethod.POST)
+    public String processOrderProductionForm(Model model, Errors errors, @RequestParam int[] unitIds) {
+        final Iterable<Unit> units = unitDao.findAll();
+        model.addAttribute("units", unitDao.findAll());
+        model.addAttribute("title", "Order Production");
+
+        for (Unit unit : units) {
+            model.addAttribute("quantity", unit.getQuantity());
+        }
+
+        for (int oneUnit : unitIds) {
+            model.addAttribute("units", unitDao.findOne(oneUnit));
+            Unit unit = unitDao.findOne(oneUnit);
+            unitDao.save(unit);
+
+        }
+        return "cheese/index";
+    }
+
 }

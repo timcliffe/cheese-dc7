@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "city")
 public class City {
-    private String name;
+    public String name;
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
