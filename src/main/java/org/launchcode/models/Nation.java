@@ -23,7 +23,7 @@ public class Nation {
 
     private int totalPopulation;
 
-    private int totalManpower;
+    private double totalManpower;
 
     @OneToMany
     @JoinColumn (name = "city_id")
@@ -43,7 +43,7 @@ public class Nation {
     public Nation() {
     }
 
-    public Nation(String name, int id, String governmentType, String leader, int totalProduction, int totalPopulation, int totalManpower, List<City> cities, List<Resource> resources, List<Territory> territories, List<Unit> units) {
+    public Nation(String name, int id, String governmentType, String leader, int totalProduction, int totalPopulation, double totalManpower, List<City> cities, List<Resource> resources, List<Territory> territories, List<Unit> units) {
         this.name = name;
         this.id = id;
         this.governmentType = governmentType;
@@ -83,7 +83,7 @@ public class Nation {
         return totalPopulation;
     }
 
-    public int getTotalManpower() {
+    public double getTotalManpower() {
         return totalManpower;
     }
 
@@ -123,7 +123,7 @@ public class Nation {
         this.totalPopulation = totalPopulation;
     }
 
-    public void setTotalManpower(int totalManpower) {
+    public void setTotalManpower(double totalManpower) {
         this.totalManpower = totalManpower;
     }
 

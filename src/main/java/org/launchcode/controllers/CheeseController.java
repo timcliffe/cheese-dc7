@@ -94,7 +94,7 @@ public class CheeseController {
     public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation,
                                        Errors errors, @RequestParam int nationId, int[] resourceIds, int[] resourceQty,
                                          int[] productionBonus, int[]territoryIds, int[] territoryQuantity, int[] cityProductionBonus,
-                                         int[] cityIds, int[] industrialTier, int[] residentialTier, int[] populationBonus, int cityPopulationBonus,
+                                         int[] cityIds, int[] industrialTier, int[] residentialTier, int[] populationBonus, int[] cityPopulationBonus,
                                        Model model) {
 
 
@@ -118,6 +118,8 @@ public class CheeseController {
             Territory territory = territoryDao.findOne(territoryId);
             int tempQuantity = territoryQuantity[territoryQtyIdx];
             territory.setQuantity(tempQuantity);
+            int territoryTotals = territoryQuantity[territoryQtyIdx] * populationBonus[territoryQtyIdx];
+            territoryPopulations = territoryPopulations + territoryTotals;
             territoryDao.save(territory);
             territoryQtyIdx++;
         }
@@ -147,7 +149,7 @@ public class CheeseController {
             if (tempResidential == 4) {
                 city.setPopulationBonus(14000000);
             }
-            cityPopulation = cityPopulation + cityPopulationBonus;
+            cityPopulation = cityPopulation + cityPopulationBonus[cityTierIdx];
             city.setIndustrialTier(tempIndustrial);
             city.setResidentialTier(tempResidential);
             cityDao.save(city);
@@ -156,6 +158,11 @@ public class CheeseController {
 
         int totalNationProduction = cityTotal + resourceTotal;
         nation.setTotalProduction(totalNationProduction);
+
+        int totalNationalPopulation = cityPopulation + territoryPopulations;
+        nation.setTotalPopulation(totalNationalPopulation);
+        double militaryManpower = totalNationalPopulation * 0.01;
+        nation.setTotalManpower(militaryManpower);
 
         nation.id = nationId;
         nationDao.save(nation);
