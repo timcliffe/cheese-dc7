@@ -48,38 +48,8 @@ public class CheeseController {
     }
 
 
-    /*@RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddCheeseForm(Model model) {
-        model.addAttribute("title", "Add Cheese");
-        model.addAttribute(new Cheese());
-        model.addAttribute("categories", categoryDao.findAll());
-        return "cheese/add";
-    }
-
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
-                                       Errors errors,
-                                       @RequestParam int categoryId,
-                                       Model model) {
-        Category cat = categoryDao.findOne(categoryId);
-        newCheese.setCategory(cat);
-
-
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
-            return "cheese/add";
-        }
-
-
-        cheeseDao.save(newCheese);
-        return "redirect:";
-    }*/
 
     @RequestMapping(value = "update-stats", method = RequestMethod.GET)
-//    @ModelAttribute("messages")
-//    public List<Nation> getNations() {
-//        return nationDao.findAll();
-//    }
     public String displayUpdateStatsForm(Model model) {
         model.addAttribute("title", "Update Stats");
         model.addAttribute("nations", nationDao.findAll());
@@ -185,98 +155,6 @@ public class CheeseController {
 
 
 
-    /*@RequestMapping(value = "update-stats", method = RequestMethod.GET)
-    public String displayUpdateStatsForm(Model model) {
-        model.addAttribute("title", "Update Stats");
-        model.addAttribute("nations", nationDao.findAll());
-        return "update-stats";
-    }
-
-
-    @RequestMapping(value = "update-stats", method = RequestMethod.POST)
-    public String processUpdateStatsForm(Model model, @RequestParam int[] nationIds) {
-        final Iterable<Nation> nations = nationDao.findAll();
-        model.addAttribute("nations", nationDao.findAll());
-        model.addAttribute("title", "Update Cheese");
-
-        for (int oneNation : nationIds) {
-            model.addAttribute("nations", nationDao.findOne(oneNation));
-            /*final Cheese cheese = cheeseDao.findOne(oneCheese);*/
-        //}
-        //return "cheese/index";
-    //}
-
-    /*@RequestMapping(value = "edit", method = RequestMethod.GET)
-    public String displayEditCheeseForm(Model model) {
-        model.addAttribute("title", "Edit Cheese");
-        model.addAttribute("cheeses", cheeseDao.findAll());
-        return "cheese/edit";
-    }
-
-    
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditUpdateCheeseForm(Model model, @RequestParam int[] cheeseIds) {
-        final Iterable<Cheese> cheeses = cheeseDao.findAll();
-        model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "Update Cheese");
-
-        for (int oneCheese : cheeseIds) {
-            model.addAttribute("cheeses", cheeseDao.findOne(oneCheese));
-
-        }
-        return "cheese/harry";
-    }*/
-
-
-//    @RequestMapping(value = "harry", method = RequestMethod.POST)
-//    public String processUpdateDB(@ModelAttribute  @Valid Cheese newCheese,
-//                                       Errors errors,
-//                                       @RequestParam int categoryId,
-//                                       Model model) {
-//        Category cat = categoryDao.findOne(categoryId);
-//        newCheese.setCategory(cat);
-//
-//
-//        if (errors.hasErrors()) {
-//            model.addAttribute("title", "Add Cheese");
-//            return "cheese/harry";
-//        }
-//
-//
-//        cheeseDao.save(newCheese);
-//        return "redirect:";
-//    }
-
-//    @RequestMapping(value = "remove", method = RequestMethod.GET)
-//    public String displayRemoveCheeseForm(Model model) {
-//        model.addAttribute("cheeses", cheeseDao.findAll());
-//        model.addAttribute("title", "Remove Cheese");
-//        return "cheese/remove";
-//    }
-
-
-//    @RequestMapping(value = "remove", method = RequestMethod.POST)
-//    public String processRemoveCheeseForm ( @RequestParam int[] cheeseIds){
-//        final Iterable<Menu> menus = menuDao.findAll();
-//
-//        for (int cheeseId : cheeseIds) {
-//            final Cheese cheese = cheeseDao.findOne(cheeseId);
-//            for (Menu menu : menus) {
-//                if (menu.getCheeses().contains(cheese)) {
-//                    menu.getCheeses().remove(cheese);
-//                    menuDao.save(menu);
-//                }
-//
-//            }
-//            for (int someCheese : cheeseIds) {
-//                cheeseDao.delete(someCheese);
-//            }
-//        }
-//
-//        return "redirect:";
-//    }
-
-
 @RequestMapping(value = "add-new-units", method = RequestMethod.GET)
     public String displayAddNewUnitsForm(Model model) {
         model.addAttribute("title", "Add New Units");
@@ -316,13 +194,6 @@ public class CheeseController {
 
 
 
-
-
-
-
-
-
-
     @RequestMapping(value = "order-production", method = RequestMethod.POST)
     public String processOrderProductionForm(@ModelAttribute @Valid Nation nation, Errors errors, Model model, @RequestParam int[] unitIds, int[] unitQuantity) {
 
@@ -341,55 +212,3 @@ public class CheeseController {
 
 }
 
-//    @RequestMapping(value = "update-stats", method = RequestMethod.POST)
-//    public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation,
-//                                         Errors errors, @RequestParam int nationId, int[] resourceIds, int[] resourceQty, int[]territoryIds,
-//                                         int[] territoryQuantity, int[] cityIds, int[] industrialTier, int[] residentialTier,
-//                                         Model model) {
-//
-//
-//        model.addAttribute("nation", nationDao.findOne(nationId));
-//        nation.id = nationId;
-//        nationDao.save(nation);
-//        int resourceQtyIdx = 0;
-//        for (int resourceId : resourceIds ) {
-//            model.addAttribute("resource", resourceDao.findOne(resourceId));
-//            Resource resource = resourceDao.findOne(resourceId);
-//            int tempQuantity = resourceQty[resourceQtyIdx];
-//            resource.setQuantity(tempQuantity);
-//            resourceDao.save(resource);
-//            resourceQtyIdx++;
-//        }
-//        int territoryQtyIdx = 0;
-//        for (int territoryId : territoryIds ) {
-//            model.addAttribute("territory", territoryDao.findOne(territoryId));
-//            Territory territory = territoryDao.findOne(territoryId);
-//            int tempQuantity = territoryQuantity[territoryQtyIdx];
-//            territory.setQuantity(tempQuantity);
-//            territoryDao.save(territory);
-//            territoryQtyIdx++;
-//        }
-//        int cityTierIdx = 0;
-//        for (int cityId : cityIds ) {
-//            model.addAttribute("city", cityDao.findOne(cityId));
-//            City city = cityDao.findOne(cityId);
-//            int tempIndustrial = industrialTier[cityTierIdx];
-//            int tempResidential = residentialTier[cityTierIdx];
-//            city.setIndustrialTier(tempIndustrial);
-//            city.setResidentialTier(tempResidential);
-//            cityDao.save(city);
-//            cityTierIdx++;
-//        }
-//
-//
-//
-//        if (errors.hasErrors()) {
-//            model.addAttribute("title", "Error");
-//            return "update-stats";
-//        }
-//        model.addAttribute("nations", nationDao.findAll());
-//        model.addAttribute("units", unitDao.findAll());
-//        model.addAttribute("title", "My Country");
-//
-//        return "cheese/index";
-//    }
