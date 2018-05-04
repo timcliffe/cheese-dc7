@@ -35,7 +35,7 @@ public class CheeseController {
 
     // Request path: /cheese
     @RequestMapping(value = "")
-    public String index(Model model) {
+    public String index(Model model, Resource Resource) {
 
         model.addAttribute("nations", nationDao.findAll());
         model.addAttribute("units", unitDao.findAll());
@@ -85,30 +85,34 @@ public class CheeseController {
         model.addAttribute("nations", nationDao.findAll());
         model.addAttribute("resources", resourceDao.findAll());
         model.addAttribute("territories", territoryDao.findAll());
+        model.addAttribute("units", unitDao.findAll());
         model.addAttribute("cities", cityDao.findAll());
         return "/update-stats";
     }
 //
     @RequestMapping(value = "update-stats", method = RequestMethod.POST)
     public String processUpdateStatsForm(@ModelAttribute  @Valid Nation nation,
-                                       Errors errors, @RequestParam int nationId, int[] resourceIds, int[] resourceQty, int[]territoryIds,
-                                         int[] territoryQuantity, int[] cityIds, int[] industrialTier, int[] residentialTier,
+                                       Errors errors, @RequestParam int nationId, int[] resourceIds, int[] resourceQty,
+                                         int[] productionBonus, int[]territoryIds, int[] territoryQuantity, int[] cityProductionBonus,
+                                         int[] cityIds, int[] industrialTier, int[] residentialTier, int[] populationBonus, int cityPopulationBonus,
                                        Model model) {
 
 
         model.addAttribute("nation", nationDao.findOne(nationId));
-        nation.id = nationId;
-        nationDao.save(nation);
         int resourceQtyIdx = 0;
+        int resourceTotal = 0;
         for (int resourceId : resourceIds ) {
             model.addAttribute("resource", resourceDao.findOne(resourceId));
             Resource resource = resourceDao.findOne(resourceId);
             int tempQuantity = resourceQty[resourceQtyIdx];
             resource.setQuantity(tempQuantity);
+            int resourceBonuses = resourceQty[resourceQtyIdx] * productionBonus[resourceQtyIdx];
+            resourceTotal = resourceTotal + resourceBonuses;
             resourceDao.save(resource);
             resourceQtyIdx++;
         }
         int territoryQtyIdx = 0;
+        int territoryPopulations = 0;
         for (int territoryId : territoryIds ) {
             model.addAttribute("territory", territoryDao.findOne(territoryId));
             Territory territory = territoryDao.findOne(territoryId);
@@ -117,30 +121,62 @@ public class CheeseController {
             territoryDao.save(territory);
             territoryQtyIdx++;
         }
+        int cityTotal = 0;
         int cityTierIdx = 0;
+        int cityPopulation = 0;
         for (int cityId : cityIds ) {
             model.addAttribute("city", cityDao.findOne(cityId));
             City city = cityDao.findOne(cityId);
             int tempIndustrial = industrialTier[cityTierIdx];
             int tempResidential = residentialTier[cityTierIdx];
+            int cityProduction = industrialTier[cityTierIdx] * 225;
+            city.setProductionBonus(cityProduction);
+            cityTotal = cityTotal + cityProduction;
+            if (tempResidential == 0) {
+                city.setPopulationBonus(0);
+            }
+            if (tempResidential == 1) {
+                city.setPopulationBonus(1000000);
+            }
+            if (tempResidential == 2) {
+                city.setPopulationBonus(3000000);
+            }
+            if (tempResidential == 3) {
+                city.setPopulationBonus(7000000);
+            }
+            if (tempResidential == 4) {
+                city.setPopulationBonus(14000000);
+            }
+            cityPopulation = cityPopulation + cityPopulationBonus;
             city.setIndustrialTier(tempIndustrial);
             city.setResidentialTier(tempResidential);
             cityDao.save(city);
             cityTierIdx++;
         }
 
+        int totalNationProduction = cityTotal + resourceTotal;
+        nation.setTotalProduction(totalNationProduction);
+
+        nation.id = nationId;
+        nationDao.save(nation);
+
 
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Error");
-            return "update-stats";
+            return "cheese/index";
         }
+        model.addAttribute("resources", resourceDao.findAll());
+        model.addAttribute("cities", cityDao.findAll());
+        model.addAttribute("territories", territoryDao.findAll());
         model.addAttribute("nations", nationDao.findAll());
         model.addAttribute("units", unitDao.findAll());
         model.addAttribute("title", "My Country");
 
         return "cheese/index";
             }
+
+
 
     /*@RequestMapping(value = "update-stats", method = RequestMethod.GET)
     public String displayUpdateStatsForm(Model model) {
