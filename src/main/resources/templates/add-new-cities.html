@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+
+
+<form method="post" style="max-width:600px;" th:object="${city}">
+    <p>Name:</p>
+    <div>
+        <input type="text" th:field="*{name}" id="unitName" name="unitName" />
+    </div>
+    <p>Industrial Tier</p>
+    <div>
+        <input type="text" th:field="*{industrialTier}" id="industrialTier" name="industrialTier" />
+    </div>
+    <p>Residential Tier:</p>
+    <div>
+        <input type="text" th:field="*{residentialTier}" id="residentialTier" name="residentialTier" />
+    </div>
+    <input type="submit" value="Add City" />
+</form>
+</body>
+</html>

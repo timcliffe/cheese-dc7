@@ -210,5 +210,33 @@ public class CheeseController {
         return "cheese/index";
     }
 
-}
+
+    @RequestMapping(value = "add-new-cities", method = RequestMethod.GET)
+    public String displayAddNewCitiesForm(Model model) {
+        model.addAttribute("title", "Add New Cities");
+        model.addAttribute(new City());
+        model.addAttribute("cities", cityDao.findAll());
+        model.addAttribute("nations", nationDao.findAll());
+        return "/add-new-cities";
+
+    }
+
+    @RequestMapping(value = "add-new-cities", method = RequestMethod.POST)
+    public String processAddNewCitiesForm(@ModelAttribute City city, Nation nation,
+                                         Errors errors,
+                                         Model model) {
+
+
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add New Cities");
+            return "/add-new-cities";
+        }
+
+
+       cityDao.save(city);
+//        nationDao.save(nation);
+        return "redirect:";
+    }}
+
 
