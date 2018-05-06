@@ -205,7 +205,7 @@ public class CheeseController {
             unit.setQuantity(tempQuantity);
             unitDao.save(unit);
             unitQtyIdx++;
-
+break;
         }
         return "cheese/index";
     }
